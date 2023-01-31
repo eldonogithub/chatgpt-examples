@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script>
+      const canvas = document.getElementById("two-body");
+      const context = canvas.getContext("2d");
+      const width = canvas.width;
+      const height = canvas.height;
+
+      function drawOrbit(x, y) {
+        context.beginPath();
+        context.arc(width / 2 + x, height / 2 + y, 5, 0, 2 * Math.PI);
+        context.fill();
+      }
+
+      function update() {
+        context.clearRect(0, 0, width, height);
+
+        // Calculate the position of the two bodies
+        let x1 = 100 * Math.cos(Date.now() / 1000);
+        let y1 = 100 * Math.sin(Date.now() / 1000);
+        let x2 = -100 * Math.cos(Date.now() / 1000);
+        let y2 = -100 * Math.sin(Date.now() / 1000);
+
+        drawOrbit(x1, y1);
+        drawOrbit(x2, y2);
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    </script>
+  </head>
+  <body>
+    <canvas id="two-body" width="400" height="400"></canvas>
+  </body>
+</html>
